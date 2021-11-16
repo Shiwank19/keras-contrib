@@ -460,11 +460,6 @@ class CRF(Layer):
             if K.backend() == 'theano':
                 m = states[3][:, t:(t + 2)]
             else:
-                m = K.slice(states[3], [0, t], [-1, 2])
-                if len(states) > 3:
-            if K.backend() == 'theano':
-                m = states[3][:, t:(t + 2)]
-            else:
                 import tensorflow as tf  # modified K.slice to tf.slice, keras=2.1.4, keras_contrib=2.0.8, tensorflow=1.0.0, python=3.6
                 m = tf.slice(states[3], [0, t], [-1, 2])
             input_energy_t = input_energy_t * K.expand_dims(m[:, 0])
